@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+    </Console>
+  </Appenders>
+
+  <Loggers>
+    <!-- ✅ Suppress KafkaDataConsumer warnings -->
+    <Logger name="org.apache.spark.sql.kafka010.consumer.KafkaDataConsumer" level="error" additivity="false">
+      <AppenderRef ref="Console"/>
+    </Logger>
+
+    <!-- (Optional) Reduce general Spark logs -->
+    <Logger name="org.apache.spark" level="warn" />
+    <Logger name="org.apache.kafka" level="error" />
+
+    <Root level="info">
+      <AppenderRef ref="Console"/>
+    </Root>
+  </Loggers>
+</Configuration>
